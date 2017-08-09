@@ -1,5 +1,6 @@
 #! ruby -Ks
 class VendingMachine
+a = ""
   def initialize
     @total = 0
     @available_money = [10, 50, 100, 500, 1000]
