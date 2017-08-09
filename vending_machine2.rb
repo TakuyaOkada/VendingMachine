@@ -18,13 +18,11 @@ class VendingMachine
   end
   
   def purchasable?
-    juice_kind_count = 0
-    while juice_kind_count < @array_juice_key.size
-      if @total >= @array_juice_key[juice_kind_count][0] && @hash_juice[@array_juice_key[juice_kind_count]] > 0
-        p "#{@array_juice_key[juice_kind_count][1]}‚Í”ƒ‚¦‚Ü‚·"
+    @hash_juice.each{|key, value|
+      if @total >= key[0] && value > 0
+        p "#{key[1]}‚Í”ƒ‚¦‚Ü‚·"
       end
-      juice_kind_count += 1
-    end
+    }
   end
   
   def total
@@ -42,21 +40,17 @@ class VendingMachine
   
   def purchase(juice_kind)
     @drink = juice_kind
-    juice_kind_count = 0
-    while juice_kind_count < @array_juice_key.size
-      if @drink == @array_juice_key[juice_kind_count][1]
-        if @total >= @array_juice_key[juice_kind_count][0] && @hash_juice[@array_juice_key[juice_kind_count]] > 0
-          @hash_juice[@array_juice_key[juice_kind_count]] = @hash_juice[@array_juice_key[juice_kind_count]] - 1
-          @sales = @sales + @array_juice_key[juice_kind_count][0]
-          @total = @total - @array_juice_key[juice_kind_count][0]
+    @hash_juice.each{|key, value|
+      if @drink == key[1]
+        if @total >= key[0] && value > 0
+          @hash_juice[key] = @hash_juice[key] - 1
+          @sales = @sales + key[0]
+          @total = @total - key[0]
           p "’Þ‚è‘K#{@total}‰~"
           @total = 0
-        else
-          return
         end
       end
-      juice_kind_count += 1
-    end
+    }
   end
   
   def sale_amount
