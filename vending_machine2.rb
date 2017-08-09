@@ -3,11 +3,9 @@ class VendingMachine
   def initialize
     @total = 0
     @available_money = [10, 50, 100, 500, 1000]
-    @hash_juce = {}
-    @array_juce_key = [[120, "ƒR[ƒ‰"], [200, "ƒŒƒbƒhƒuƒ‹"], [100, "…"]]
-    @array_juce_key.each{|key|
-      @hash_juce[key] = 5
-    }
+    @hash_juice = {}
+    @array_juice_key = [[120, "ƒR[ƒ‰"], [200, "ƒŒƒbƒhƒuƒ‹"], [100, "…"]]
+    @array_juice_key.each{|key| @hash_juice[key] = 5}
     @sales = 0
   end
   
@@ -15,56 +13,54 @@ class VendingMachine
     if @available_money.include?(insert)
       @total = @total + insert
     else
-      p "’Ş‚è‘K", insert
+      p "’Ş‚è‘K#{insert}‰~"
     end
   end
   
   def purchasable?
-    juce_kind_count = 0
-    while juce_kind_count < @array_juce_key.size
-      if @total >= @array_juce_key[juce_kind_count][0] && @hash_juce[@array_juce_key[juce_kind_count]] > 0
-        p @array_juce_key[juce_kind_count][1], "purchasable"
-      else
-        p @array_juce_key[juce_kind_count][1], "unpurchasable"
+    juice_kind_count = 0
+    while juice_kind_count < @array_juice_key.size
+      if @total >= @array_juice_key[juice_kind_count][0] && @hash_juice[@array_juice_key[juice_kind_count]] > 0
+        p "#{@array_juice_key[juice_kind_count][1]}‚Í”ƒ‚¦‚Ü‚·"
       end
-      juce_kind_count += 1
+      juice_kind_count += 1
     end
   end
   
   def total
-    p "“Š“ü‹àŠz‘Œv", @total
+    return @total
   end
   
   def refund
-    p "’Ş‚è‘K", @total
+    p "’Ş‚è‘K#{@total}‰~"
     @total = 0
   end
   
   def stock_info
-    p "ƒWƒ…[ƒXî•ñ", @hash_juce
+    return @hash_juice
   end
   
-  def purchase(juce_kind)
-    @drink = juce_kind
-    juce_kind_count = 0
-    while juce_kind_count < @array_juce_key.size
-      if @drink == @array_juce_key[juce_kind_count][1]
-        if @total >= @array_juce_key[juce_kind_count][0] && @hash_juce[@array_juce_key[juce_kind_count]] > 0
-          @hash_juce[@array_juce_key[juce_kind_count]] = @hash_juce[@array_juce_key[juce_kind_count]] - 1
-          @sales = @sales + @array_juce_key[juce_kind_count][0]
-          @total = @total - @array_juce_key[juce_kind_count][0]
-          p "’Ş‚è‘K", @total
+  def purchase(juice_kind)
+    @drink = juice_kind
+    juice_kind_count = 0
+    while juice_kind_count < @array_juice_key.size
+      if @drink == @array_juice_key[juice_kind_count][1]
+        if @total >= @array_juice_key[juice_kind_count][0] && @hash_juice[@array_juice_key[juice_kind_count]] > 0
+          @hash_juice[@array_juice_key[juice_kind_count]] = @hash_juice[@array_juice_key[juice_kind_count]] - 1
+          @sales = @sales + @array_juice_key[juice_kind_count][0]
+          @total = @total - @array_juice_key[juice_kind_count][0]
+          p "’Ş‚è‘K#{@total}‰~"
           @total = 0
         else
           return
         end
       end
-      juce_kind_count += 1
+      juice_kind_count += 1
     end
   end
   
   def sale_amount
-    p "”„ã‹àŠz", @sales
+    p "”„ã‹àŠz#{@sales}‰~"
   end
   
 end
