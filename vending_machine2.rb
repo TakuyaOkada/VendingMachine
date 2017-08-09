@@ -39,9 +39,8 @@ class VendingMachine
   end
   
   def purchase(juice_kind)
-    @drink = juice_kind
     @hash_juice.each{|key, value|
-      if @drink == key[1]
+      if juice_kind == key[1]
         if @total >= key[0] && value > 0
           @hash_juice[key] = @hash_juice[key] - 1
           @sales = @sales + key[0]
