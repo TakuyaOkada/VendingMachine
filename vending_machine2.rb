@@ -5,20 +5,17 @@ class VendingMachine
     @available_money = [10, 50, 100, 500, 1000]
     @hash_juce = {}
     @array_juce_key = [[120, "コーラ"], [200, "レッドブル"], [100, "水"]]
-    juce_kind_count = 0
-    while juce_kind_count < @array_juce_key.size
-      @hash_juce[@array_juce_key[juce_kind_count]] = 5
-      juce_kind_count += 1
-    end
+    @array_juce_key.each{|key|
+      @hash_juce[key] = 5
+    }
     @sales = 0
   end
   
   def insert(insert)
-    @insert_money = insert
-    if @available_money.include?(@insert_money)
-      @total = @total + @insert_money
+    if @available_money.include?(insert)
+      @total = @total + insert
     else
-      p "釣り銭", @insert_money
+      p "釣り銭", insert
     end
   end
   
